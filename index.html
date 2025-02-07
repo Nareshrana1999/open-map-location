@@ -28,10 +28,11 @@
         button:hover {
             background-color: #0056b3;
         }
-        #map {
+        iframe {
             width: 100%;
             height: 500px;
             margin-top: 20px;
+            border: none;
         }
     </style>
 </head>
@@ -45,32 +46,18 @@
     <br>
     <button onclick="showLocation()">Show Location</button>
 
-    <div id="map"></div>
+    <br>
+    <iframe id="mapFrame" 
+        src="https://www.google.com/maps?q=13.124903067253435,77.62044512001961&output=embed">
+    </iframe>
 
     <script>
-        function initMap(lat, lng) {
-            let location = { lat: parseFloat(lat), lng: parseFloat(lng) };
-
-            let map = new google.maps.Map(document.getElementById("map"), {
-                center: location,
-                zoom: 15
-            });
-
-            new google.maps.Marker({
-                position: location,
-                map: map
-            });
-        }
-
         function showLocation() {
             let lat = document.getElementById("latitude").value;
             let lng = document.getElementById("longitude").value;
-            initMap(lat, lng);
+            let mapUrl = `https://www.google.com/maps?q=${lat},${lng}&output=embed`;
+            document.getElementById("mapFrame").src = mapUrl;
         }
-    </script>
-
-    <!-- Load Google Maps API -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
     </script>
 
 </body>

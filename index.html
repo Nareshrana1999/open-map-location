@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Open Location in Google Maps</title>
+    <title>Show Location on Google Map</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            padding: 50px;
+            padding: 20px;
         }
         input {
             padding: 10px;
@@ -28,25 +28,49 @@
         button:hover {
             background-color: #0056b3;
         }
+        #map {
+            width: 100%;
+            height: 500px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
 
-    <h2>Enter Latitude & Longitude</h2>
-    <p>Click the button to open the location in Google Maps.</p>
-    
-    <input type="text" id="latitude" placeholder="Enter Latitude" value="13.1249589">
-    <input type="text" id="longitude" placeholder="Enter Longitude" value="77.6203994">
+    <h2>Show Location on Google Map</h2>
+    <p>Enter latitude & longitude, then click "Show Location".</p>
+
+    <input type="text" id="latitude" placeholder="Enter Latitude" value="13.124903067253435">
+    <input type="text" id="longitude" placeholder="Enter Longitude" value="77.62044512001961">
     <br>
-    <button onclick="openGoogleMaps()">Open Map</button>
+    <button onclick="showLocation()">Show Location</button>
+
+    <div id="map"></div>
 
     <script>
-        function openGoogleMaps() {
+        function initMap(lat, lng) {
+            let location = { lat: parseFloat(lat), lng: parseFloat(lng) };
+
+            let map = new google.maps.Map(document.getElementById("map"), {
+                center: location,
+                zoom: 15
+            });
+
+            new google.maps.Marker({
+                position: location,
+                map: map
+            });
+        }
+
+        function showLocation() {
             let lat = document.getElementById("latitude").value;
             let lng = document.getElementById("longitude").value;
-            let googleMapsUrl = `https://www.google.com/maps?q=${lat},${lng}`;
-            window.open(googleMapsUrl, "_blank");
+            initMap(lat, lng);
         }
+    </script>
+
+    <!-- Load Google Maps API -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
     </script>
 
 </body>

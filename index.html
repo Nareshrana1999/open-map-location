@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Location in Google Maps</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        input {
+            padding: 10px;
+            margin: 10px;
+            width: 200px;
+            font-size: 16px;
+        }
+        button {
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Enter Latitude & Longitude</h2>
+    <p>Click the button to open the location in Google Maps.</p>
+    
+    <input type="text" id="latitude" placeholder="Enter Latitude" value="13.1249589">
+    <input type="text" id="longitude" placeholder="Enter Longitude" value="77.6203994">
+    <br>
+    <button onclick="openGoogleMaps()">Open Map</button>
+
+    <script>
+        function openGoogleMaps() {
+            let lat = document.getElementById("latitude").value;
+            let lng = document.getElementById("longitude").value;
+            let googleMapsUrl = `https://www.google.com/maps?q=${lat},${lng}`;
+            window.open(googleMapsUrl, "_blank");
+        }
+    </script>
+
+</body>
+</html>

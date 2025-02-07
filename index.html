@@ -33,6 +33,7 @@
             height: 500px;
             margin-top: 20px;
             border: none;
+            display: none;
         }
     </style>
 </head>
@@ -41,22 +42,28 @@
     <h2>Show Location on Google Map</h2>
     <p>Enter latitude & longitude, then click "Show Location".</p>
 
-    <input type="text" id="latitude" placeholder="Enter Latitude" value="13.124903067253435">
-    <input type="text" id="longitude" placeholder="Enter Longitude" value="77.62044512001961">
+    <input type="text" id="latitude" placeholder="Enter Latitude">
+    <input type="text" id="longitude" placeholder="Enter Longitude">
     <br>
     <button onclick="showLocation()">Show Location</button>
 
     <br>
-    <iframe id="mapFrame" 
-        src="https://www.google.com/maps?q=13.124903067253435,77.62044512001961&output=embed">
-    </iframe>
+    <iframe id="mapFrame"></iframe>
 
     <script>
         function showLocation() {
-            let lat = document.getElementById("latitude").value;
-            let lng = document.getElementById("longitude").value;
+            let lat = document.getElementById("latitude").value.trim();
+            let lng = document.getElementById("longitude").value.trim();
+
+            if (lat === "" || lng === "") {
+                alert("Please enter both latitude and longitude.");
+                return;
+            }
+
             let mapUrl = `https://www.google.com/maps?q=${lat},${lng}&output=embed`;
-            document.getElementById("mapFrame").src = mapUrl;
+            let mapFrame = document.getElementById("mapFrame");
+            mapFrame.src = mapUrl;
+            mapFrame.style.display = "block";
         }
     </script>
 
